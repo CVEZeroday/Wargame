@@ -1,0 +1,28 @@
+1. 카나리 우회
+그냥 하면됨
+
+2. PIE base 구하기
+rbp + 0x18에서 main 주소 leak
+main - 1a로 win 함수 주소 leak
+
+3. win 함수 호출 (main - 1a)
+rbp + 0x8에 win 함수 주소 stack bof
+
+rbp == rsp + 0x450
+카나리 == rsp + 0x450 - 0x8
+
+exploit 계획
+1. canary leak
+2. main address leak
+3. ret 주소 bof
+4. canary값 bof
+
+====== stack alignment
+
+스택 정리
+rbp - 0x440 == input
+rbp - 0x3f0 == buf
+rbp - 0x8 == canary
+rbp - 0x448 == len
+rbp - 0x44c == target_len
+rbp - 0x444 == count
